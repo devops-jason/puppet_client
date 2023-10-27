@@ -8,7 +8,7 @@ class puppet_client ( String $puppet_server = 'puppet.local' ) {
 
    exec { 'add puppet-release':
     command => '/usr/bin/dnf install https://yum.puppetlabs.com/puppet-release-el-8.noarch.rpm',
-    unless => '/usr/bin/dnf list | grep puppet-release 2> /dev/null',
+    unless  => '/usr/bin/dnf list | grep puppet-release 2> /dev/null',
   }
 
   package { 'puppet':
@@ -34,7 +34,7 @@ class puppet_client ( String $puppet_server = 'puppet.local' ) {
 
   file { '/etc/puppetlabs/puppet/puppet.conf':
     ensure  => 'present',
-    owner   => 'root'
+    owner   => 'root',
     group   => 'root',
     mode    => '0644',
     content => template('puppet_client/puppet.conf.erb'),
